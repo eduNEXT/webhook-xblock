@@ -1,0 +1,9 @@
+/* CSS for WebhookXblock */
+
+.webhook_xblock_block .count {
+    font-weight: bold;
+}
+
+.webhook_xblock_block p {
+    cursor: pointer;
+}
