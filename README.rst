@@ -1,4 +1,81 @@
-README for An X-block to send a payload with basic information about the course and student to a configurable URL.
+## Webhook XBlock
+
+This repository provides an X-block that triggers a webhook by sending a payload with basic information 
+ about the course and student to a configurable URL.
+
+The XBlock can be set in three modes:
+* Send the payload every time the user visits the course unit
+* Send the payload only the first time the user visits the course unit (default mode)
+* Allow the student to send the request by clicking on a button
+
+Other **available configurations** are:
+* Add a text to the component to show to the student
+* Configure the button text (in case the student is allow to send the payload)
+* Send extra information in the payload
+* Send the student's course grade
+
+
+Description of the payload
+------------------
+
+* payload_name: A string to help identify the course component that is sending the payload. 
+* anonymous_student_id: A string that contains an anonymized identifier of the student.
+* timestamp: Timestamp for when the student visits the xblock component.
+* student_is_active: Boolean that indicates whether the student is active in the platform.
+* student_email: Email of the student.
+* student_date_joined: Timestamp for when the student got registered in the platform.
+* student_username: Username of the student.
+
+If the *Send course grade* option is enabled, three extra fields are added:
+* passed: Boolean representing whether the course has been passed according to the course's grading policy.
+* percent: A float representing the overall grade for the course.
+* letter_grade: A letter grade as defined in grading policy (e.g. 'A' 'B' 'C') or None.
+
+```
+{
+    'payload_name': 'course-started', 
+    'anonymous_student_id': '8db9fe4e00b4f713d37187bb363fb7cc', 
+    'percent': 0.0, 
+    'timestamp': '2021-07-26T07:28:47.243653', 
+    'passed': False, 
+    'student_is_active': True, 
+    'student_email': 'test@example.com', 
+    'course_id': 'course-v1:edunext+01+test', 
+    'student_date_joined': '2021-04-22T13:15:43.457066-05:00', 
+    'student_username': 'testUser', 
+    'letter_grade': None
+}
+```
+
+Enabling XBlock in Studio
+------------------
+
+You can enable the Webhook XBlock in Studio by
+modifying the advanced settings for your course:
+
+* Navigate to **Settings** -> **Advanced Settings** and go to the **Advanced Module List** setting.
+* To enable the XBlock for your course, add `"webhook-xblock"` to the list and save the changes.
+
+
+Usage
+=======
+
+Enabling XBlock in Studio
+------------------
+
+You can enable the Webhook XBlock in Studio by
+modifying the advanced settings for your course:
+
+* Navigate to **Settings** -> **Advanced Settings** and go to the **Advanced Module List** setting.
+* To enable the XBlock for your course, add `"webhook-xblock"` to the list and save the changes.
+
+Configure XBlock
+------------------
+
+First, enable the XBlock in Studio.
+
+Once you add a webhook component to the course, you can
+then click on "edit" to make the configurations.
 
 
 Testing with Docker

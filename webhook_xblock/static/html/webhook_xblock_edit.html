@@ -1,0 +1,78 @@
+<div class="wrapper-comp-settings is-active editor-with-buttons" id="settings-tab">
+  <ul class="list-input settings-list">
+    <li class="field comp-setting-entry is-set">
+      <div class="wrapper-comp-setting">
+        <label class="label setting-label" for="webhook_xblock_name">Name<p>*</p></label>
+        <input class="input setting-input" name="webhook_xblock_name" id="webhook_xblock_name"  value="{name}" type="text" />
+      </div>
+      <span class="tip setting-help">String to help identify the triggered course component that<br>is sending the payload (e.g. course-started-webhook).</span>
+    </li>
+    <li class="field comp-setting-entry is-set">
+      <div class="wrapper-comp-setting">
+        <label class="label setting-label" for="webhook_xblock_url">URL<p>*</p></label>
+        <input class="input setting-input" name="webhook_xblock_url" id="webhook_xblock_url" value="{webhook_url}" type="text" />
+      </div>
+      <span class="tip setting-help">URL to send the payload to.</span>
+    </li>
+    <li class="field comp-setting-entry is-set">
+      <div class="wrapper-comp-setting">
+        <label class="label setting-label" for="webhook_xblock_frequency">Frequency</label>
+        <input class="input setting-input" name="webhook_xblock_frequency_value" id="webhook_xblock_frequency_value" value="{frequency}" type="hidden" />
+        <select class="input setting-input" list="frequency-options" name="webhook_xblock_frequency" id="webhook_xblock_frequency" >
+            <option value="one-time">One time</option>
+            <option value="always">Always</option>
+            <option value="sent-by-student">Let the student send the information</option>
+        </select>
+      </div>
+      <span class="tip setting-help">Indicate how often should we send the information</span>
+    </li>
+    <li class="field comp-setting-entry is-set">
+      <div class="wrapper-comp-setting">
+        <label class="label setting-label" for="webhook_xblock_button_text">Button text</label>
+        <input class="input setting-input" name="webhook_xblock_button_text" id="webhook_xblock_button_text" value="{button_text}" type="text" />
+      </div>
+      <span class="tip setting-help">Button inner text, in case the student is<br>allowed to decide when to send the payload.</span>
+    </li>
+    <li class="field comp-setting-entry is-set">
+      <div class="wrapper-comp-setting">
+        <label class="label setting-label" for="webhook_xblock_component_text">Additional text</label>
+        <input class="input setting-input" name="webhook_xblock_component_text_value" id="webhook_xblock_component_text_value" value="{component_text}" type="hidden"/>
+        <textarea class="input setting-input" rows="1" cols="78" name="webhook_xblock_component_text" id="webhook_xblock_component_text" type="text"></textarea>
+      </div>
+      <span class="tip setting-help">Additional text to show in this component to the student<br>HTML formatting.</span>
+    </li>
+    <li class="field comp-setting-entry is-set">
+      <div class="wrapper-comp-setting">
+        <label class="label setting-label" for="webhook_xblock_extra_info">Extra Information</label>
+        <input class="input setting-input" name="webhook_xblock_extra_info_value" id="webhook_xblock_extra_info_value" value="{extra_info}" type="hidden"/>
+        <textarea class="input setting-input" rows="1" cols="78" name="webhook_xblock_extra_info" id="webhook_xblock_extra_info" type="text"></textarea>
+      </div>
+      <span class="tip setting-help">Extra information to be sent in the payload.<br>Enter the fields in this format: &#123;"field_name": value, "another_field_name": another_value&#125;</span>
+    </li>
+    <li class="field comp-setting-entry is-set">
+        <div class="wrapper-comp-setting">
+          <label class="label setting-label" for="webhook_xblock_send_course_grade">Send Course Grade</label>
+          <input class="input setting-input-bool" name="webhook_xblock_send_course_grade" id="webhook_xblock_send_course_grade" value="{send_course_grade}" type="checkbox" />
+        </div>
+        <span class="tip setting-help">Send the student's course grade in the payload.</span>
+    </li>
+    <!-- Hide this field until we can figure out how to send the async task -->
+    <li class="field comp-setting-entry is-set">
+      <div class="wrapper-comp-setting">
+        <!--<label class="label setting-label" for="webhook_xblock_send_async">Send in Async Task</label>-->
+        <input class="input setting-input-bool" name="webhook_xblock_send_async" id="webhook_xblock_send_async" value="{send_async}" type="hidden" />
+      </div>
+      <!--<span class="tip setting-help">Send the payload in an async task.</span>-->
+    </li>
+  </ul>
+  <div class="xblock-actions">
+    <ul>
+      <li class="action-item">
+        <a href="#" class="button action-primary save-button">Save</a>
+      </li>
+      <li class="action-item">
+        <a href="#" class="button cancel-button">Cancel</a>
+      </li>
+    </ul>
+  </div>
+</div>
