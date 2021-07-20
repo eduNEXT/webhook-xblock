@@ -1,28 +1,54 @@
 /* Javascript for WebhookXblock. */
 function WebhookXblock(runtime, element) {
+    var frequency = document.getElementById('webhook_xblock_frequency').value;
+    var button_text = document.getElementById('webhook_xblock_button_text').value;
+    var studio_mode = document.getElementById('webhook_xblock_studio_mode').value;
+    var handlerUrl = runtime.handlerUrl(element, 'send_payload');
 
-    function updateCount(result) {
-        $('.count', element).text(result.count);
+    function notifyStudent(result) {
+        alert('The information has been sent');
     }
 
-    var handlerUrl = runtime.handlerUrl(element, 'increment_count');
+    function checkFrequency() {
+        if (frequency == 'sent-by-student'){
+            var div = document.getElementById('webhook-xblock-center-button');
+            var button = document.createElement('button');
+            button.type = 'button';
+            button.innerHTML = button_text;
+            button.className = 'btn-styled';
 
-    $('p', element).click(function(eventObject) {
-        $.ajax({
-            type: "POST",
-            url: handlerUrl,
-            data: JSON.stringify({"hello": "world"}),
-            success: updateCount
-        });
-    });
+            if (studio_mode == 'True'){
+                button.disabled = true;
+                button.title = 'The payload cannot be sent when running from Studio mode';
+            }
+            
+            button.onclick = function() {
+                $.ajax({
+                    type: "POST",
+                    url: handlerUrl,
+                    data: JSON.stringify({'send_payload': 'True'}),
+                    success: notifyStudent
+                });
+            };
 
-    $(function ($) {
-        /*
-        Use `gettext` provided by django-statici18n for static translations
 
-        var gettext = WebhookXblocki18n.gettext;
-        */
+            div.appendChild(button);
+        }
+        else{
+            $(function ($) {
+                $.ajax({
+                    type: "POST",
+                    url: handlerUrl,
+                    data: JSON.stringify({checkpoint: true}),
+                    success: function(result) {
+                        runtime.notify('save', {state: 'end'});
+                    }
+                });
+            });
+        }
+    }
 
-        /* Here's where you'd do things on page load. */
-    });
+    window.onload = checkFrequency();
+
 }
+
