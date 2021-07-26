@@ -1,9 +1,11 @@
 /* CSS for WebhookXblock */
 
-.webhook_xblock_block .count {
-    font-weight: bold;
+.webhook_xblock_block .webhook-xblock-center-button {
+    justify-content: center;
+    text-align: center;
 }
 
-.webhook_xblock_block p {
-    cursor: pointer;
+.wrapper-comp-settings.is-active.editor-with-buttons .wrapper-comp-setting p{
+    color: red;
+    display: inline;
 }
