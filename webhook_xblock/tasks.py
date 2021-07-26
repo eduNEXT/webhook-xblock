@@ -10,7 +10,6 @@ from webhook_xblock.constants import REQUEST_TIMEOUT
 
 LOGGER = get_task_logger(__name__)
 
-RETRY_DELAY = 5 * 60
 MAX_RETRIES = 3
 
 
