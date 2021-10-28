@@ -219,6 +219,7 @@ class WebhookXblock(XBlock):
             course_id = str(self.runtime.course_id)
             student = self.runtime.get_real_user(current_anonymous_student_id)
             serialized_student = AccountUserSerializer(student)
+            response = False
 
             payload = {
                 "payload_name": self.name,
