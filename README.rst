@@ -18,7 +18,7 @@ Other **available configurations** are:
 * Send the student's course grade
 
 Description of the payload
----------------------------
+--------------------------
 
 * **payload_name**: A string to help identify the course component that is sending the payload.
 * **anonymous_student_id**: A string that contains an anonymized identifier of the student.
@@ -35,20 +35,21 @@ If the *Send course grade* option is enabled, three extra fields are added:
 * **letter_grade**: A letter grade as defined in grading policy (e.g., 'A', 'B', 'C') or None.
 
 
-.. code-block:: JSON
-        {
-            'payload_name': 'course-started', 
-            'anonymous_student_id': '8db9fe4e00b4f713d37187bb363fb7cc', 
-            'percent': 0.0, 
-            'timestamp': '2021-07-26T07:28:47.243653', 
-            'passed': False, 
-            'student_is_active': True, 
-            'student_email': 'test@example.com', 
-            'course_id': 'course-v1:edunext+01+test', 
-            'student_date_joined': '2021-04-22T13:15:43.457066-05:00', 
-            'student_username': 'testUser', 
-            'letter_grade': None
-        }
+.. code-block:: python
+
+    {
+        'payload_name': 'course-started',
+        'anonymous_student_id': '8db9fe4e00b4f713d37187bb363fb7cc',
+        'percent': 0.0,
+        'timestamp': '2021-07-26T07:28:47.243653',
+        'passed': False,
+        'student_is_active': True,
+        'student_email': 'test@example.com',
+        'course_id': 'course-v1:edunext+01+test',
+        'student_date_joined': '2021-04-22T13:15:43.457066-05:00',
+        'student_username': 'testUser',
+        'letter_grade': None
+    }
 
 
 Compatibility Notes
@@ -73,10 +74,10 @@ Compatibility Notes
 +------------------+---------------+
 
 Usage
-=======
+=====
 
 Enabling XBlock in Studio
---------------------------
+-------------------------
 
 You can enable the Webhook XBlock in Studio by
 modifying the advanced settings for your course:
@@ -85,7 +86,7 @@ modifying the advanced settings for your course:
 * To enable the XBlock for your course, add `"webhook-xblock"` to the list and save the changes.
 
 Configure XBlock
-------------------
+----------------
 
 First, enable the XBlock in Studio.
 
@@ -94,16 +95,18 @@ then click on "edit" to make the configurations.
 
 
 Testing with Docker
-====================
+===================
 
-This XBlock comes with a Docker test environment ready to build, based on the xblock-sdk workbench. To build and run it::
+This XBlock comes with a Docker test environment ready to build, based on the xblock-sdk workbench. To build and run it:
 
-    $ make dev.run
+.. code-block:: bash
+
+    make dev.run
 
 The XBlock SDK Workbench, including this XBlock, will be available on the list of XBlocks at http://localhost:8000
 
 Translating
-=============
+===========
 
 Internationalization (i18n) is when a program is made aware of multiple languages.
 Localization (l10n) is adapting a program to local language and cultural habits.
@@ -123,11 +126,12 @@ The general steps to provide multilingual messages for a Python program (or an X
 3. Create language specific translations for each message in the catalogs.
 4. Use ``gettext`` to translate strings.
 
-5. Mark translatable strings
------------------------------
+1. Mark translatable strings
+----------------------------
 
-Mark translatable strings in python::
+Mark translatable strings in python:
 
+.. code-block:: python
 
     from django.utils.translation import ugettext as _
 
@@ -137,8 +141,9 @@ Mark translatable strings in python::
 See `edx-developer-guide <https://edx.readthedocs.io/projects/edx-developer-guide/en/latest/internationalization/i18n.html#python-source-code>`_
 for more information.
 
-You can also use ``gettext`` to mark strings in javascript::
+You can also use ``gettext`` to mark strings in javascript:
 
+.. code-block:: javascript
 
     // Translators: This comment will appear in the `.po` file.
     var message = gettext("Custom message.");
@@ -155,10 +160,11 @@ use `edx-i18n-tools <https://github.com/edx/i18n-tools>`_.
 After marking strings as translatable we have to create the raw message catalogs.
 These catalogs are created in ``.po`` files. For more information see
 `GNU PO file documentation <https://www.gnu.org/software/gettext/manual/html_node/PO-Files.html>`_.
-These catalogs can be created by running::
+These catalogs can be created by running:
 
+.. code-block:: bash
 
-    $ make extract_translations
+    make extract_translations
 
 The previous command will create the necessary ``.po`` files under
 ``webhook-xblock/webhook_xblock/locale/en/LC_MESSAGES/text.po``.
@@ -167,10 +173,10 @@ The ``text.po`` file is created from the ``django-partial.po`` file created by
 this is why you will not see a ``django-partial.po`` file.
 
 3. Create language specific translations
-----------------------------------------------
+----------------------------------------
 
 3.1 Add translated strings
-***************************
+**************************
 
 After creating the raw message catalogs, all translations should be filled out by the translator.
 One or more translators must edit the entries created in the message catalog, i.e. the ``.po`` file(s).
@@ -187,56 +193,66 @@ The format of each entry is as follows::
 For more information see
 `GNU PO file documentation <https://www.gnu.org/software/gettext/manual/html_node/PO-Files.html>`_.
 
-To use translations from transifex use the follow Make target to pull translations::
+To use translations from transifex use the follow Make target to pull translations:
 
-    $ make pull_translations
+.. code-block:: bash
+
+    make pull_translations
 
 See `config instructions <https://github.com/edx/i18n-tools#transifex-commands>`_ for information on how to set up your
 transifex credentials.
 
 See `transifex documentation <https://docs.transifex.com/integrations/django>`_ for more details about integrating
-django with transiflex.
+django with transifex.
 
 3.2 Compile translations
-*************************
+************************
 
 Once translations are in place, use the following Make target to compile the translation catalogs ``.po`` into
-``.mo`` message files::
+``.mo`` message files:
 
-    $ make compile_translations
+.. code-block:: bash
+
+    make compile_translations
 
 The previous command will compile ``.po`` files using
 ``django-admin compilemessages`` (`compilemessages documentation <https://docs.djangoproject.com/en/2.2/topics/i18n/translation/#compiling-message-files>`_).
 After compiling the ``.po`` file(s), ``django-statici18n`` is used to create language specific catalogs. See
 ``django-statici18n`` `documentation <https://django-statici18n.readthedocs.io/en/latest/>`_ for more information.
 
-To upload translations to transiflex use the follow Make target::
+To upload translations to transifex use the follow Make target:
 
-    $ make push_translations
+.. code-block:: bash
+
+    make push_translations
 
 See `config instructions <https://github.com/edx/i18n-tools#transifex-commands>`_ for information on how to set up your
 transifex credentials.
 
 See `transifex documentation <https://docs.transifex.com/integrations/django>`_ for more details about integrating
-django with transiflex.
+django with transifex.
 
  **Note:** The ``dev.run`` make target will automatically compile any translations.
 
- **Note:** To check if the source translation files (``.po``) are up-to-date run::
+ **Note:** To check if the source translation files (``.po``) are up-to-date run:
 
-     $ make detect_changed_source_translations
+.. code-block:: bash
 
-4. Use ``gettext`` to translate strings
-----------------------------------------
+    make detect_changed_source_translations
+
+1. Use ``gettext`` to translate strings
+---------------------------------------
 
 Django will automatically use ``gettext`` and the compiled translations to translate strings.
 
 Troubleshooting
-================
+===============
 
-If there are any errors compiling ``.po`` files run the following command to validate your ``.po`` files::
+If there are any errors compiling ``.po`` files run the following command to validate your ``.po`` files:
 
-    $ make validate
+.. code-block:: bash
+
+    make validate
 
 See `django's i18n troubleshooting documentation
 <https://docs.djangoproject.com/en/2.2/topics/i18n/translation/#troubleshooting-gettext-incorrectly-detects-python-format-in-strings-with-percent-signs>`_
