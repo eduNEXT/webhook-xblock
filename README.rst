@@ -1,7 +1,8 @@
-## Webhook XBlock
+Webhook XBlock
+##############
 
 This repository provides an X-block that triggers a webhook by sending a payload with basic information 
- about the course and student to a configurable URL.
+about the course and student to a configurable URL.
 
 The XBlock can be set in three modes:
 * Send the payload every time the user visits the course unit
@@ -16,7 +17,7 @@ Other **available configurations** are:
 
 
 Description of the payload
-------------------
+--------------------------
 
 * payload_name: A string to help identify the course component that is sending the payload. 
 * anonymous_student_id: A string that contains an anonymized identifier of the student.
@@ -31,24 +32,25 @@ If the *Send course grade* option is enabled, three extra fields are added:
 * percent: A float representing the overall grade for the course.
 * letter_grade: A letter grade as defined in grading policy (e.g. 'A' 'B' 'C') or None.
 
-```
-{
-    'payload_name': 'course-started', 
-    'anonymous_student_id': '8db9fe4e00b4f713d37187bb363fb7cc', 
-    'percent': 0.0, 
-    'timestamp': '2021-07-26T07:28:47.243653', 
-    'passed': False, 
-    'student_is_active': True, 
-    'student_email': 'test@example.com', 
-    'course_id': 'course-v1:edunext+01+test', 
-    'student_date_joined': '2021-04-22T13:15:43.457066-05:00', 
-    'student_username': 'testUser', 
-    'letter_grade': None
-}
-```
+   .. code:: python
+
+       {
+           'payload_name': 'course-started', 
+           'anonymous_student_id': '8db9fe4e00b4f713d37187bb363fb7cc', 
+           'percent': 0.0, 
+           'timestamp': '2021-07-26T07:28:47.243653', 
+           'passed': False, 
+           'student_is_active': True, 
+           'student_email': 'test@example.com', 
+           'course_id': 'course-v1:edunext+01+test', 
+           'student_date_joined': '2021-04-22T13:15:43.457066-05:00', 
+           'student_username': 'testUser', 
+           'letter_grade': None
+       }
+
 
 Enabling XBlock in Studio
-------------------
+-------------------------
 
 You can enable the Webhook XBlock in Studio by
 modifying the advanced settings for your course:
@@ -58,10 +60,10 @@ modifying the advanced settings for your course:
 
 
 Usage
-=======
+=====
 
 Enabling XBlock in Studio
-------------------
+-------------------------
 
 You can enable the Webhook XBlock in Studio by
 modifying the advanced settings for your course:
@@ -70,7 +72,7 @@ modifying the advanced settings for your course:
 * To enable the XBlock for your course, add `"webhook-xblock"` to the list and save the changes.
 
 Configure XBlock
-------------------
+----------------
 
 First, enable the XBlock in Studio.
 
@@ -79,7 +81,7 @@ then click on "edit" to make the configurations.
 
 
 Testing with Docker
-====================
+===================
 
 This XBlock comes with a Docker test environment ready to build, based on the xblock-sdk workbench. To build and run it::
 
@@ -88,7 +90,7 @@ This XBlock comes with a Docker test environment ready to build, based on the xb
 The XBlock SDK Workbench, including this XBlock, will be available on the list of XBlocks at http://localhost:8000
 
 Translating
-=============
+===========
 
 Internationalization (i18n) is when a program is made aware of multiple languages.
 Localization (l10n) is adapting a program to local language and cultural habits.
@@ -109,7 +111,7 @@ The general steps to provide multilingual messages for a Python program (or an X
 4. Use ``gettext`` to translate strings.
 
 1. Mark translatable strings
------------------------------
+----------------------------
 
 Mark translatable strings in python::
 
