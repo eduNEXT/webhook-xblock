@@ -1,4 +1,6 @@
-## Webhook XBlock
+==============
+Webhook XBlock
+==============
 
 This repository provides an X-block that triggers a webhook by sending a payload with basic information 
  about the course and student to a configurable URL.
