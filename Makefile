@@ -98,12 +98,12 @@ symlink_translations:
 
 test-python: clean ## Run test suite.
 	$(TOX) pip install -r requirements/test.txt --exists-action w
-	$(TOX) coverage run --source="." -m pytest ./eox_tagging --ignore-glob='**/integration/*'
+	$(TOX) coverage run --source="." -m pytest ./webhook_xblock --ignore-glob='**/integration/*'
 	$(TOX) coverage report -m --fail-under=71
 
 quality: clean ## Run quality test.
-	$(TOX) pycodestyle ./eox_tagging
-	$(TOX) pylint ./eox_tagging --rcfile=./setup.cfg
-	$(TOX) isort --check-only --diff ./eox_tagging --skip ./eox_tagging/migrations
+	$(TOX) pycodestyle ./webhook_xblock
+	$(TOX) pylint ./webhook_xblock --rcfile=./setup.cfg
+	$(TOX) isort --check-only --diff ./webhook_xblock --skip ./webhook_xblock/migrations
 
 run-tests: test-python quality
