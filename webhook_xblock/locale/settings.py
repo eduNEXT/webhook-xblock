@@ -44,11 +44,3 @@ STATICI18N_PACKAGES = (
 )
 STATICI18N_ROOT = 'webhook_xblock/public/js'
 STATICI18N_OUTPUT_DIR = 'translations'
-
-# For testing
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'db.sqlite3',
-    },
-}

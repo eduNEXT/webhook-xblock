@@ -8,6 +8,7 @@ import os
 
 import yaml
 
+import webhook_xblock.locale.settings
 
 class SettingsClass:
     """ dummy settings class """
