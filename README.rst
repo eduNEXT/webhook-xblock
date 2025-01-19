@@ -4,12 +4,14 @@ Webhook XBlock
 This repository provides an X-block that triggers a webhook by sending a payload with basic information 
 about the course and student to a configurable URL.
 
-The XBlock can be set in three modes:
+**The XBlock can be set in three modes**:
+
 * Send the payload every time the user visits the course unit
 * Send the payload only the first time the user visits the course unit (default mode)
 * Allow the student to send the request by clicking on a button
 
 Other **available configurations** are:
+
 * Add a text to the component to show to the student
 * Configure the button text (in case the student is allowed to send the payload)
 * Send extra information in the payload
@@ -27,6 +29,7 @@ Description of the payload
 * **student_username**: Username of the student.
 
 If the *Send course grade* option is enabled, three extra fields are added:
+
 * **passed**: Boolean representing whether the course has been passed according to the course's grading policy.
 * **percent**: A float representing the overall grade for the course.
 * **letter_grade**: A letter grade as defined in grading policy (e.g., 'A', 'B', 'C') or None.
@@ -54,14 +57,6 @@ Compatibility Notes
 +------------------+---------------+
 | Open edX Release | Version       |
 +==================+===============+
-| Ironwood         | < 1.0.0       |
-+------------------+---------------+
-| Juniper          | < 1.0.0       |
-+------------------+---------------+
-| Koa              | < 1.0.0       |
-+------------------+---------------+
-| Lilac            | < 1.0.0       |
-+------------------+---------------+
 | Maple            | < 1.0.0       |
 +------------------+---------------+
 | Nutmeg           | < 1.0.0       |
@@ -81,7 +76,7 @@ Usage
 =======
 
 Enabling XBlock in Studio
-------------------
+--------------------------
 
 You can enable the Webhook XBlock in Studio by
 modifying the advanced settings for your course:
@@ -128,7 +123,7 @@ The general steps to provide multilingual messages for a Python program (or an X
 3. Create language specific translations for each message in the catalogs.
 4. Use ``gettext`` to translate strings.
 
-1. Mark translatable strings
+5. Mark translatable strings
 -----------------------------
 
 Mark translatable strings in python::
