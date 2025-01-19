@@ -10,22 +10,21 @@ import logging
 
 import pkg_resources
 import requests
-from django.contrib.auth import get_user_model
 from django.utils import translation
-from lms.djangoapps.grades.course_grade_factory import CourseGradeFactory
 from opaque_keys.edx.keys import CourseKey
-from openedx.core.djangoapps.user_api.accounts.serializers import AccountUserSerializer
 from xblock.core import XBlock
 from xblock.fields import Boolean, Dict, Scope, String
 from xblock.fragment import Fragment
 from xblockutils.resources import ResourceLoader
 
 from webhook_xblock.constants import REQUEST_TIMEOUT
+from webhook_xblock.edxapp_wrapper.grade import course_grade_factory as CourseGradeFactory
+from webhook_xblock.edxapp_wrapper.user import account_user_serializer as AccountUserSerializer
+from webhook_xblock.edxapp_wrapper.user import edx_user_model as User
 from webhook_xblock.tasks import task_send_payload
 from webhook_xblock.utils import flatten_dict
 
 LOGGER = logging.getLogger(__name__)
-User = get_user_model()
 
 
 class WebhookXblock(XBlock):
@@ -155,9 +154,9 @@ class WebhookXblock(XBlock):
         except Exception as err:  # pylint: disable=broad-except
             LOGGER.error(
                 'Could not retrieve grades for %s user in course %s: %s',
-                user=username,
-                course=course_id,
-                err=err,
+                username,
+                course_id,
+                err,
             )
 
         return grade
@@ -294,8 +293,8 @@ class WebhookXblock(XBlock):
     @staticmethod
     def _get_statici18n_js_url():
         """
-        Returns the Javascript translation file for the currently selected language, if any.
-        Defaults to English if available.
+        Returns the Javascript translation file for the currently
+        selected language, if any. Defaults to English if available.
         """
         locale_code = translation.get_language()
         if locale_code is None:

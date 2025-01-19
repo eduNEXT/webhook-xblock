@@ -4,105 +4,131 @@
 #
 #    make upgrade
 #
+amqp==5.3.1
+    # via
+    #   -r requirements/quality.txt
+    #   kombu
 appdirs==1.4.4
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   fs
 asgiref==3.8.1
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   django
 astroid==3.3.8
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   pylint
     #   pylint-celery
 backports-tarfile==1.2.0
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   jaraco-context
-boto3==1.35.89
+billiard==4.2.1
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
+    #   celery
+boto3==1.36.2
+    # via
+    #   -r requirements/quality.txt
     #   fs-s3fs
-botocore==1.35.89
+botocore==1.36.2
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   boto3
     #   s3transfer
 build==1.2.2.post1
     # via
-    #   -r /openedx/webhook-xblock/requirements/pip-tools.txt
+    #   -r requirements/pip-tools.txt
     #   pip-tools
 cachetools==5.5.0
     # via
-    #   -r /openedx/webhook-xblock/requirements/ci.txt
+    #   -r requirements/ci.txt
     #   tox
+celery==5.4.0
+    # via -r requirements/quality.txt
 certifi==2024.12.14
     # via
-    #   -r /openedx/webhook-xblock/requirements/ci.txt
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/ci.txt
+    #   -r requirements/quality.txt
     #   requests
 cffi==1.17.1
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   cryptography
 chardet==5.2.0
     # via
-    #   -r /openedx/webhook-xblock/requirements/ci.txt
+    #   -r requirements/ci.txt
     #   diff-cover
     #   tox
 charset-normalizer==3.4.1
     # via
-    #   -r /openedx/webhook-xblock/requirements/ci.txt
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/ci.txt
+    #   -r requirements/quality.txt
     #   requests
 click==8.1.8
     # via
-    #   -r /openedx/webhook-xblock/requirements/pip-tools.txt
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/pip-tools.txt
+    #   -r requirements/quality.txt
+    #   celery
+    #   click-didyoumean
     #   click-log
+    #   click-plugins
+    #   click-repl
     #   code-annotations
     #   edx-lint
     #   pip-tools
+click-didyoumean==0.3.1
+    # via
+    #   -r requirements/quality.txt
+    #   celery
 click-log==0.4.0
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   edx-lint
-code-annotations==2.1.0
+click-plugins==1.1.1
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
+    #   celery
+click-repl==0.3.0
+    # via
+    #   -r requirements/quality.txt
+    #   celery
+code-annotations==2.2.0
+    # via
+    #   -r requirements/quality.txt
     #   edx-lint
 codecov==2.1.13
-    # via -r /openedx/webhook-xblock/requirements/ci.txt
+    # via -r requirements/ci.txt
 colorama==0.4.6
     # via
-    #   -r /openedx/webhook-xblock/requirements/ci.txt
+    #   -r requirements/ci.txt
     #   tox
 coverage[toml]==7.6.10
     # via
-    #   -r /openedx/webhook-xblock/requirements/ci.txt
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/ci.txt
+    #   -r requirements/quality.txt
     #   codecov
     #   pytest-cov
 cryptography==44.0.0
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   secretstorage
 diff-cover==9.2.1
     # via -r requirements/dev.in
 dill==0.3.9
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   pylint
 distlib==0.3.9
     # via
-    #   -r /openedx/webhook-xblock/requirements/ci.txt
+    #   -r requirements/ci.txt
     #   virtualenv
-django==4.2.17
+django==4.2.18
     # via
     #   -c https://raw.githubusercontent.com/openedx/edx-lint/master/edx_lint/files/common_constraints.txt
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   django-appconf
     #   django-statici18n
     #   edx-i18n-tools
@@ -113,82 +139,86 @@ django-statici18n==2.6.0
     # via -r requirements/dev.in
 docutils==0.21.2
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   readme-renderer
 edx-i18n-tools==1.6.3
     # via -r requirements/dev.in
 edx-lint==5.4.1
-    # via -r /openedx/webhook-xblock/requirements/quality.txt
+    # via -r requirements/quality.txt
 filelock==3.16.1
     # via
-    #   -r /openedx/webhook-xblock/requirements/ci.txt
+    #   -r requirements/ci.txt
     #   tox
     #   virtualenv
 fs==2.4.16
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   fs-s3fs
     #   openedx-django-pyfs
     #   xblock
 fs-s3fs==1.1.1
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   openedx-django-pyfs
 idna==3.10
     # via
-    #   -r /openedx/webhook-xblock/requirements/ci.txt
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/ci.txt
+    #   -r requirements/quality.txt
     #   requests
 importlib-metadata==8.5.0
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   keyring
 iniconfig==2.0.0
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   pytest
 isort==5.13.2
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   pylint
 jaraco-classes==3.4.0
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   keyring
 jaraco-context==6.0.1
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   keyring
 jaraco-functools==4.1.0
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   keyring
 jeepney==0.8.0
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   keyring
     #   secretstorage
 jinja2==3.1.5
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   code-annotations
     #   diff-cover
 jmespath==1.0.1
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   boto3
     #   botocore
 keyring==25.6.0
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   twine
+kombu==5.4.2
+    # via
+    #   -r requirements/quality.txt
+    #   celery
 lazy==1.6
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   xblock
 lxml[html-clean]==5.3.0
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   edx-i18n-tools
     #   lxml-html-clean
     #   xblock
@@ -196,46 +226,46 @@ lxml-html-clean==0.4.1
     # via lxml
 mako==1.3.8
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
     #   -r requirements/dev.in
+    #   -r requirements/quality.txt
     #   xblock
     #   xblock-utils
 markdown-it-py==3.0.0
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   rich
 markupsafe==3.0.2
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   jinja2
     #   mako
     #   xblock
 mccabe==0.7.0
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   pylint
 mdurl==0.1.2
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   markdown-it-py
-more-itertools==10.5.0
+more-itertools==10.6.0
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   jaraco-classes
     #   jaraco-functools
 nh3==0.2.20
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   readme-renderer
 openedx-django-pyfs==3.7.0
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   xblock
 packaging==24.2
     # via
-    #   -r /openedx/webhook-xblock/requirements/ci.txt
-    #   -r /openedx/webhook-xblock/requirements/pip-tools.txt
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/ci.txt
+    #   -r requirements/pip-tools.txt
+    #   -r requirements/quality.txt
     #   build
     #   pyproject-api
     #   pytest
@@ -245,137 +275,145 @@ path==16.16.0
     # via edx-i18n-tools
 pbr==6.1.0
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   stevedore
 pip-tools==7.4.1
-    # via -r /openedx/webhook-xblock/requirements/pip-tools.txt
+    # via -r requirements/pip-tools.txt
 pkginfo==1.12.0
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   twine
 platformdirs==4.3.6
     # via
-    #   -r /openedx/webhook-xblock/requirements/ci.txt
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/ci.txt
+    #   -r requirements/quality.txt
     #   pylint
     #   tox
     #   virtualenv
 pluggy==1.5.0
     # via
-    #   -r /openedx/webhook-xblock/requirements/ci.txt
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/ci.txt
+    #   -r requirements/quality.txt
     #   diff-cover
     #   pytest
     #   tox
 polib==1.2.0
     # via edx-i18n-tools
+prompt-toolkit==3.0.48
+    # via
+    #   -r requirements/quality.txt
+    #   click-repl
 pycodestyle==2.12.1
-    # via -r /openedx/webhook-xblock/requirements/quality.txt
+    # via -r requirements/quality.txt
 pycparser==2.22
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   cffi
 pydocstyle==6.3.0
-    # via -r /openedx/webhook-xblock/requirements/quality.txt
-pygments==2.18.0
+    # via -r requirements/quality.txt
+pygments==2.19.1
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   diff-cover
     #   readme-renderer
     #   rich
 pylint==3.3.3
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   edx-lint
     #   pylint-celery
     #   pylint-django
     #   pylint-plugin-utils
 pylint-celery==0.3
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   edx-lint
 pylint-django==2.6.1
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   edx-lint
 pylint-plugin-utils==0.8.2
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   pylint-celery
     #   pylint-django
 pyproject-api==1.8.0
     # via
-    #   -r /openedx/webhook-xblock/requirements/ci.txt
+    #   -r requirements/ci.txt
     #   tox
 pyproject-hooks==1.2.0
     # via
-    #   -r /openedx/webhook-xblock/requirements/pip-tools.txt
+    #   -r requirements/pip-tools.txt
     #   build
     #   pip-tools
 pytest==8.3.4
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   pytest-cov
+    #   pytest-django
 pytest-cov==6.0.0
-    # via -r /openedx/webhook-xblock/requirements/quality.txt
+    # via -r requirements/quality.txt
+pytest-django==4.9.0
+    # via -r requirements/quality.txt
 python-dateutil==2.9.0.post0
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   botocore
+    #   celery
     #   xblock
 python-slugify==8.0.4
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   code-annotations
 pytz==2024.2
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   xblock
 pyyaml==6.0.2
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   code-annotations
     #   edx-i18n-tools
     #   xblock
 readme-renderer==44.0
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   twine
 requests==2.32.3
     # via
-    #   -r /openedx/webhook-xblock/requirements/ci.txt
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/ci.txt
+    #   -r requirements/quality.txt
     #   codecov
     #   requests-toolbelt
     #   twine
 requests-toolbelt==1.0.0
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   twine
 rfc3986==2.0.0
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   twine
 rich==13.9.4
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   twine
-s3transfer==0.10.4
+s3transfer==0.11.1
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   boto3
 secretstorage==3.3.3
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   keyring
 simplejson==3.19.3
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   xblock
     #   xblock-utils
 six==1.17.0
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   edx-lint
     #   fs
     #   fs-s3fs
@@ -383,68 +421,84 @@ six==1.17.0
     #   transifex-client
 snowballstemmer==2.2.0
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   pydocstyle
 sqlparse==0.5.3
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   django
 stevedore==5.4.0
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   code-annotations
 text-unidecode==1.3
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   python-slugify
 tomlkit==0.13.2
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   pylint
 tox==4.23.2
     # via
-    #   -r /openedx/webhook-xblock/requirements/ci.txt
+    #   -r requirements/ci.txt
     #   tox-battery
 tox-battery==0.6.1
     # via -r requirements/dev.in
 transifex-client==0.12.5
     # via -r requirements/dev.in
 twine==6.0.1
-    # via -r /openedx/webhook-xblock/requirements/quality.txt
-urllib3==2.3.0
+    # via -r requirements/quality.txt
+tzdata==2024.2
     # via
-    #   -r /openedx/webhook-xblock/requirements/ci.txt
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
+    #   celery
+    #   kombu
+urllib3==2.2.3
+    # via
+    #   -c https://raw.githubusercontent.com/openedx/edx-lint/master/edx_lint/files/common_constraints.txt
+    #   -r requirements/ci.txt
+    #   -r requirements/quality.txt
     #   botocore
     #   requests
     #   transifex-client
     #   twine
-virtualenv==20.28.0
+vine==5.1.0
     # via
-    #   -r /openedx/webhook-xblock/requirements/ci.txt
+    #   -r requirements/quality.txt
+    #   amqp
+    #   celery
+    #   kombu
+virtualenv==20.29.1
+    # via
+    #   -r requirements/ci.txt
     #   tox
+wcwidth==0.2.13
+    # via
+    #   -r requirements/quality.txt
+    #   prompt-toolkit
 web-fragments==2.2.0
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   xblock
     #   xblock-utils
 webob==1.8.9
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   xblock
 wheel==0.45.1
     # via
-    #   -r /openedx/webhook-xblock/requirements/pip-tools.txt
+    #   -r requirements/pip-tools.txt
     #   pip-tools
 xblock[django]==5.1.0
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   xblock-utils
 xblock-utils==4.0.0
-    # via -r /openedx/webhook-xblock/requirements/quality.txt
+    # via -r requirements/quality.txt
 zipp==3.21.0
     # via
-    #   -r /openedx/webhook-xblock/requirements/quality.txt
+    #   -r requirements/quality.txt
     #   importlib-metadata
 
 # The following packages are considered to be unsafe in a requirements file:

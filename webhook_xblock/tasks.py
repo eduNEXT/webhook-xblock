@@ -6,7 +6,7 @@ from celery import shared_task  # pylint: disable=import-error
 from celery.utils.log import get_task_logger  # pylint: disable=import-error
 from requests.exceptions import Timeout
 
-from webhook_xblock.constants import REQUEST_TIMEOUT
+from webhook_xblock.constants import REQUEST_TIMEOUT, RETRY_DELAY
 
 LOGGER = get_task_logger(__name__)
 
@@ -29,13 +29,13 @@ def task_send_payload(self, data, url):  # pylint: disable=unused-argument
 
         if response.ok:
             return True
-        else:
-            LOGGER.error("Webhook-Xblock request FAILED for course {course}. status {code} - {msg}".format(
-                code=response.status_code,
-                msg=getattr(response, "text", ""),
-                course=course_id,
-            ))
-            return False
+
+        LOGGER.error("Webhook-Xblock request FAILED for course {course}. status {code} - {msg}".format(
+            code=response.status_code,
+            msg=getattr(response, "text", ""),
+            course=course_id,
+        ))
+        return False
     except Exception as exc:  # pylint: disable=broad-except
         retry_task(self, exc, url)
 
@@ -52,4 +52,3 @@ def retry_task(task, exception, url):
         return False
 
     raise task.retry(exc=exception, countdown=RETRY_DELAY)
-

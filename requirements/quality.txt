@@ -4,13 +4,17 @@
 #
 #    make upgrade
 #
+amqp==5.3.1
+    # via
+    #   -r requirements/test.txt
+    #   kombu
 appdirs==1.4.4
     # via
-    #   -r /openedx/webhook-xblock/requirements/test.txt
+    #   -r requirements/test.txt
     #   fs
 asgiref==3.8.1
     # via
-    #   -r /openedx/webhook-xblock/requirements/test.txt
+    #   -r requirements/test.txt
     #   django
 astroid==3.3.8
     # via
@@ -18,42 +22,69 @@ astroid==3.3.8
     #   pylint-celery
 backports-tarfile==1.2.0
     # via jaraco-context
-boto3==1.35.89
+billiard==4.2.1
     # via
-    #   -r /openedx/webhook-xblock/requirements/test.txt
+    #   -r requirements/test.txt
+    #   celery
+boto3==1.36.2
+    # via
+    #   -r requirements/test.txt
     #   fs-s3fs
-botocore==1.35.89
+botocore==1.36.2
     # via
-    #   -r /openedx/webhook-xblock/requirements/test.txt
+    #   -r requirements/test.txt
     #   boto3
     #   s3transfer
+celery==5.4.0
+    # via -r requirements/test.txt
 certifi==2024.12.14
-    # via requests
+    # via
+    #   -r requirements/test.txt
+    #   requests
 cffi==1.17.1
     # via cryptography
 charset-normalizer==3.4.1
-    # via requests
+    # via
+    #   -r requirements/test.txt
+    #   requests
 click==8.1.8
     # via
+    #   -r requirements/test.txt
+    #   celery
+    #   click-didyoumean
     #   click-log
+    #   click-plugins
+    #   click-repl
     #   code-annotations
     #   edx-lint
+click-didyoumean==0.3.1
+    # via
+    #   -r requirements/test.txt
+    #   celery
 click-log==0.4.0
     # via edx-lint
-code-annotations==2.1.0
+click-plugins==1.1.1
+    # via
+    #   -r requirements/test.txt
+    #   celery
+click-repl==0.3.0
+    # via
+    #   -r requirements/test.txt
+    #   celery
+code-annotations==2.2.0
     # via edx-lint
 coverage[toml]==7.6.10
     # via
-    #   -r /openedx/webhook-xblock/requirements/test.txt
+    #   -r requirements/test.txt
     #   pytest-cov
 cryptography==44.0.0
     # via secretstorage
 dill==0.3.9
     # via pylint
-django==4.2.17
+django==4.2.18
     # via
     #   -c https://raw.githubusercontent.com/openedx/edx-lint/master/edx_lint/files/common_constraints.txt
-    #   -r /openedx/webhook-xblock/requirements/test.txt
+    #   -r requirements/test.txt
     #   openedx-django-pyfs
 docutils==0.21.2
     # via readme-renderer
@@ -61,21 +92,23 @@ edx-lint==5.4.1
     # via -r requirements/quality.in
 fs==2.4.16
     # via
-    #   -r /openedx/webhook-xblock/requirements/test.txt
+    #   -r requirements/test.txt
     #   fs-s3fs
     #   openedx-django-pyfs
     #   xblock
 fs-s3fs==1.1.1
     # via
-    #   -r /openedx/webhook-xblock/requirements/test.txt
+    #   -r requirements/test.txt
     #   openedx-django-pyfs
 idna==3.10
-    # via requests
+    # via
+    #   -r requirements/test.txt
+    #   requests
 importlib-metadata==8.5.0
     # via keyring
 iniconfig==2.0.0
     # via
-    #   -r /openedx/webhook-xblock/requirements/test.txt
+    #   -r requirements/test.txt
     #   pytest
 isort==5.13.2
     # via
@@ -95,29 +128,33 @@ jinja2==3.1.5
     # via code-annotations
 jmespath==1.0.1
     # via
-    #   -r /openedx/webhook-xblock/requirements/test.txt
+    #   -r requirements/test.txt
     #   boto3
     #   botocore
 keyring==25.6.0
     # via twine
+kombu==5.4.2
+    # via
+    #   -r requirements/test.txt
+    #   celery
 lazy==1.6
     # via
-    #   -r /openedx/webhook-xblock/requirements/test.txt
+    #   -r requirements/test.txt
     #   xblock
 lxml==5.3.0
     # via
-    #   -r /openedx/webhook-xblock/requirements/test.txt
+    #   -r requirements/test.txt
     #   xblock
 mako==1.3.8
     # via
-    #   -r /openedx/webhook-xblock/requirements/test.txt
+    #   -r requirements/test.txt
     #   xblock
     #   xblock-utils
 markdown-it-py==3.0.0
     # via rich
 markupsafe==3.0.2
     # via
-    #   -r /openedx/webhook-xblock/requirements/test.txt
+    #   -r requirements/test.txt
     #   jinja2
     #   mako
     #   xblock
@@ -125,7 +162,7 @@ mccabe==0.7.0
     # via pylint
 mdurl==0.1.2
     # via markdown-it-py
-more-itertools==10.5.0
+more-itertools==10.6.0
     # via
     #   jaraco-classes
     #   jaraco-functools
@@ -133,11 +170,11 @@ nh3==0.2.20
     # via readme-renderer
 openedx-django-pyfs==3.7.0
     # via
-    #   -r /openedx/webhook-xblock/requirements/test.txt
+    #   -r requirements/test.txt
     #   xblock
 packaging==24.2
     # via
-    #   -r /openedx/webhook-xblock/requirements/test.txt
+    #   -r requirements/test.txt
     #   pytest
     #   twine
 pbr==6.1.0
@@ -148,15 +185,19 @@ platformdirs==4.3.6
     # via pylint
 pluggy==1.5.0
     # via
-    #   -r /openedx/webhook-xblock/requirements/test.txt
+    #   -r requirements/test.txt
     #   pytest
+prompt-toolkit==3.0.48
+    # via
+    #   -r requirements/test.txt
+    #   click-repl
 pycodestyle==2.12.1
     # via -r requirements/quality.in
 pycparser==2.22
     # via cffi
 pydocstyle==6.3.0
     # via -r requirements/quality.in
-pygments==2.18.0
+pygments==2.19.1
     # via
     #   readme-renderer
     #   rich
@@ -176,30 +217,35 @@ pylint-plugin-utils==0.8.2
     #   pylint-django
 pytest==8.3.4
     # via
-    #   -r /openedx/webhook-xblock/requirements/test.txt
+    #   -r requirements/test.txt
     #   pytest-cov
+    #   pytest-django
 pytest-cov==6.0.0
-    # via -r /openedx/webhook-xblock/requirements/test.txt
+    # via -r requirements/test.txt
+pytest-django==4.9.0
+    # via -r requirements/test.txt
 python-dateutil==2.9.0.post0
     # via
-    #   -r /openedx/webhook-xblock/requirements/test.txt
+    #   -r requirements/test.txt
     #   botocore
+    #   celery
     #   xblock
 python-slugify==8.0.4
     # via code-annotations
 pytz==2024.2
     # via
-    #   -r /openedx/webhook-xblock/requirements/test.txt
+    #   -r requirements/test.txt
     #   xblock
 pyyaml==6.0.2
     # via
-    #   -r /openedx/webhook-xblock/requirements/test.txt
+    #   -r requirements/test.txt
     #   code-annotations
     #   xblock
 readme-renderer==44.0
     # via twine
 requests==2.32.3
     # via
+    #   -r requirements/test.txt
     #   requests-toolbelt
     #   twine
 requests-toolbelt==1.0.0
@@ -208,20 +254,20 @@ rfc3986==2.0.0
     # via twine
 rich==13.9.4
     # via twine
-s3transfer==0.10.4
+s3transfer==0.11.1
     # via
-    #   -r /openedx/webhook-xblock/requirements/test.txt
+    #   -r requirements/test.txt
     #   boto3
 secretstorage==3.3.3
     # via keyring
 simplejson==3.19.3
     # via
-    #   -r /openedx/webhook-xblock/requirements/test.txt
+    #   -r requirements/test.txt
     #   xblock
     #   xblock-utils
 six==1.17.0
     # via
-    #   -r /openedx/webhook-xblock/requirements/test.txt
+    #   -r requirements/test.txt
     #   edx-lint
     #   fs
     #   fs-s3fs
@@ -230,7 +276,7 @@ snowballstemmer==2.2.0
     # via pydocstyle
 sqlparse==0.5.3
     # via
-    #   -r /openedx/webhook-xblock/requirements/test.txt
+    #   -r requirements/test.txt
     #   django
 stevedore==5.4.0
     # via code-annotations
@@ -240,27 +286,43 @@ tomlkit==0.13.2
     # via pylint
 twine==6.0.1
     # via -r requirements/quality.in
-urllib3==2.3.0
+tzdata==2024.2
     # via
-    #   -r /openedx/webhook-xblock/requirements/test.txt
+    #   -r requirements/test.txt
+    #   celery
+    #   kombu
+urllib3==2.2.3
+    # via
+    #   -c https://raw.githubusercontent.com/openedx/edx-lint/master/edx_lint/files/common_constraints.txt
+    #   -r requirements/test.txt
     #   botocore
     #   requests
     #   twine
+vine==5.1.0
+    # via
+    #   -r requirements/test.txt
+    #   amqp
+    #   celery
+    #   kombu
+wcwidth==0.2.13
+    # via
+    #   -r requirements/test.txt
+    #   prompt-toolkit
 web-fragments==2.2.0
     # via
-    #   -r /openedx/webhook-xblock/requirements/test.txt
+    #   -r requirements/test.txt
     #   xblock
     #   xblock-utils
 webob==1.8.9
     # via
-    #   -r /openedx/webhook-xblock/requirements/test.txt
+    #   -r requirements/test.txt
     #   xblock
 xblock[django]==5.1.0
     # via
-    #   -r /openedx/webhook-xblock/requirements/test.txt
+    #   -r requirements/test.txt
     #   xblock-utils
 xblock-utils==4.0.0
-    # via -r /openedx/webhook-xblock/requirements/test.txt
+    # via -r requirements/test.txt
 zipp==3.21.0
     # via importlib-metadata
 
