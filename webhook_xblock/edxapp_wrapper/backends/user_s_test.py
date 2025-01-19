@@ -9,10 +9,10 @@ def get_edx_user_model():
     """
     try:
         from django.contrib.auth import get_user_model  # pylint: disable=import-outside-toplevel
-        User = get_user_model()
+        return get_user_model()
     except ImportError:
-        from django.contrib.auth.models import User
-    return User
+        from django.contrib.auth.models import User  # pylint: disable=import-outside-toplevel
+        return User
 
 
 def get_account_user_serializer():

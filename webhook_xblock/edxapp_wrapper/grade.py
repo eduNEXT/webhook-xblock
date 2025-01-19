@@ -22,4 +22,4 @@ class GradeBackend(BaseBackend):
 
 user_backend = GradeBackend()
 
-course_grade_factory = user_backend.get_course_grade_factory
+get_course_grade_factory = user_backend.get_course_grade_factory

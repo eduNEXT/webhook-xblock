@@ -1,6 +1,4 @@
 """Unit tests for the WebhookXblock class."""
-import datetime
-import json
 from unittest import TestCase
 from unittest.mock import Mock, patch
 
@@ -70,8 +68,8 @@ class TestWebhookXblock(TestCase):
 
         self.assertFalse(result)
 
-    @patch("webhook_xblock.webhook_xblock.User")
-    @patch("webhook_xblock.webhook_xblock.CourseGradeFactory")
+    @patch("webhook_xblock.webhook_xblock.get_edx_user_model")
+    @patch("webhook_xblock.webhook_xblock.get_course_grade_factory")
     def test_get_course_grade_success(self, mock_course_grade_factory, mock_user_model):
         """Test that get_course_grade returns the correct grade information."""
         mock_user = Mock()
@@ -82,13 +80,13 @@ class TestWebhookXblock(TestCase):
         mock_course_grade.passed = True
         mock_course_grade.percent = 0.85
         mock_course_grade.letter_grade = "B"
-        mock_course_grade_factory().read.return_value = mock_course_grade
+        mock_course_grade_factory()().read.return_value = mock_course_grade
 
         grade = self.xblock.get_course_grade("course-v1:edX+DemoX+2025_T1", "student123")
 
         self.assertEqual(grade, {"passed": True, "percent": 0.85, "letter_grade": "B"})
 
-    @patch("webhook_xblock.webhook_xblock.User")
+    @patch("webhook_xblock.webhook_xblock.get_edx_user_model")
     def test_get_course_grade_exception(self, mock_user_model):
         """Test that get_course_grade returns an empty dict on exception."""
         mock_user_model.objects.get.side_effect = Exception("Error")

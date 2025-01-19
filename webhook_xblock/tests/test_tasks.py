@@ -1,3 +1,4 @@
+"""Module for the tasks unit tests."""
 from unittest import TestCase
 from unittest.mock import Mock, patch
 
@@ -12,7 +13,7 @@ class TestTasks(TestCase):
         """Test that task_send_payload returns True on successful request."""
         mock_post.return_value.ok = True
         data = {"course_id": "course-v1:edX+DemoX+2025_T1"}
-        result = task_send_payload(data, "http://example.com")
+        result = task_send_payload(data, "http://example.com")  # pylint: disable=no-value-for-parameter
 
         self.assertTrue(result)
 
@@ -23,7 +24,7 @@ class TestTasks(TestCase):
         mock_post.side_effect = Exception("Error")
         data = {"course_id": "course-v1:edX+DemoX+2025_T1"}
 
-        task_send_payload(data, "http://example.com")
+        task_send_payload(data, "http://example.com")  # pylint: disable=no-value-for-parameter
 
         mock_retry_task.assert_called_once()
 
@@ -37,11 +38,13 @@ class TestTasks(TestCase):
         data = {"course_id": "course-v1:edX+DemoX+2025_T1"}
         url = "http://example.com/webhook"
 
-        result = task_send_payload(data, url)
+        result = task_send_payload(data, url)  # pylint: disable=no-value-for-parameter
 
         mock_logger.error.assert_called_once_with(
-            "Webhook-Xblock request FAILED for course course-v1:edX+DemoX+2025_T1. "
-            "status 500 - Internal Server Error"
+            "Webhook-Xblock request FAILED for course %s. status %s - %s",
+            "course-v1:edX+DemoX+2025_T1",
+            500,
+            "Internal Server Error",
         )
         self.assertFalse(result)
 
@@ -62,7 +65,7 @@ class TestRetryTask(TestCase):
         result = retry_task(task, exception, url)
 
         mock_logger.error.assert_called_once_with(
-            "Could not send payload to {url}. MAX RETRIES EXCEEDED".format(url=url)
+            "Could not send payload to %s. MAX RETRIES EXCEEDED", "http://example.com/webhook"
         )
         self.assertFalse(result)
 

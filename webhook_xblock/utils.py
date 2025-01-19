@@ -10,7 +10,7 @@ def flatten_dict(d, parent_key='', sep='_'):
     """
     items = []
     for key, value in d.items():
-        new_key = "{parent_key}{sep}{key}".format(parent_key=parent_key, sep=sep, key=key) if parent_key else key
+        new_key = f"{parent_key}{sep}{key}" if parent_key else key
         if isinstance(value, MutableMapping):
             items.extend(flatten_dict(value, new_key, sep=sep).items())
         else:

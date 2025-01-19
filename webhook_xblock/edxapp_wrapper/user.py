@@ -26,5 +26,5 @@ class UserBackend(BaseBackend):
 
 user_backend = UserBackend()
 
-edx_user_model = user_backend.get_edx_user_model
-account_user_serializer = user_backend.get_account_user_serializer
+get_edx_user_model = user_backend.get_edx_user_model
+get_account_user_serializer = user_backend.get_account_user_serializer
