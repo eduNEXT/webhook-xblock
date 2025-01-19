@@ -44,3 +44,7 @@ STATICI18N_PACKAGES = (
 )
 STATICI18N_ROOT = 'webhook_xblock/public/js'
 STATICI18N_OUTPUT_DIR = 'translations'
+
+# Plugin settings
+WEBHOOK_USER_MODULE_BACKEND = "webhook_xblock.edxapp_wrapper.backends.user_s"
+WEBHOOK_GRADE_MODULE_BACKEND = "webhook_xblock.edxapp_wrapper.backends.grade_s"
