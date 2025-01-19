@@ -1,5 +1,9 @@
 .DEFAULT_GOAL := help
 
+ifdef TOXENV
+TOX := tox -- #to isolate each tox environment if TOXENV is defined
+endif
+
 .PHONY: dev.clean dev.build dev.run upgrade help requirements
 .PHONY: extract_translations compile_translations
 .PHONY: detect_changed_source_translations dummy_translations build_dummy_translations
@@ -17,6 +21,15 @@ TRANSLATIONS_DIR := $(PACKAGE_NAME)/translations
 help:
 	@perl -nle'print $& if m{^[\.a-zA-Z_-]+:.*?## .*$$}' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m  %-25s\033[0m %s\n", $$1, $$2}'
 
+install-dev-dependencies: ## install tox
+	pip install -r requirements/tox.txt
+
+clean: ## delete most git-ignored files
+	find . -name '__pycache__' -exec rm -rf {} +
+	find . -name '*.pyc' -exec rm -f {} +
+	find . -name '*.pyo' -exec rm -f {} +
+	find . -name '*~' -exec rm -f {} +
+
 # Define PIP_COMPILE_OPTS=-v to get more information during make upgrade.
 PIP_COMPILE = pip-compile --upgrade $(PIP_COMPILE_OPTS)
 
@@ -33,11 +46,15 @@ upgrade: ## update the requirements/*.txt files with the latest packages satisfy
 	$(PIP_COMPILE) -o requirements/quality.txt requirements/quality.in
 	$(PIP_COMPILE) -o requirements/ci.txt requirements/ci.in
 	$(PIP_COMPILE) -o requirements/dev.txt requirements/dev.in
+	$(PIP_COMPILE) -o requirements/tox.txt requirements/tox.in
 
 requirements: ## install development environment requirements
 	pip install -r requirements/pip.txt
 	pip install -qr requirements/pip-tools.txt
 	pip install -r requirements/dev.txt
+
+test_requirements:
+	pip install -r requirements/test.txt
 
 dev.clean:
 	-docker rm $(REPO_NAME)-dev
@@ -78,3 +95,14 @@ push_translations: extract_translations ## push translations to transifex
 
 symlink_translations:
 	if [ ! -d "$(TRANSLATIONS_DIR)" ]; then ln -s locale/ $(TRANSLATIONS_DIR); fi
+
+test-python: clean ## Run test suite.
+	$(TOX) pip install -r requirements/dev.txt --exists-action w
+	$(TOX) coverage run --source="." -m pytest ./webhook_xblock
+
+quality: clean ## Run quality test.
+	$(TOX) pycodestyle ./webhook_xblock
+	$(TOX) pylint ./webhook_xblock --rcfile=./setup.cfg
+	$(TOX) isort --check-only --diff ./webhook_xblock --skip ./webhook_xblock/migrations
+
+run-tests: test-python quality

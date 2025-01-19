@@ -10,25 +10,23 @@ import logging
 
 import pkg_resources
 import requests
-from django.contrib.auth import get_user_model
 from django.utils import translation
-from lms.djangoapps.grades.course_grade_factory import CourseGradeFactory
 from opaque_keys.edx.keys import CourseKey
-from openedx.core.djangoapps.user_api.accounts.serializers import AccountUserSerializer
 from xblock.core import XBlock
 from xblock.fields import Boolean, Dict, Scope, String
 from xblock.fragment import Fragment
 from xblockutils.resources import ResourceLoader
 
 from webhook_xblock.constants import REQUEST_TIMEOUT
+from webhook_xblock.edxapp_wrapper.grade import get_course_grade_factory
+from webhook_xblock.edxapp_wrapper.user import get_account_user_serializer, get_edx_user_model
 from webhook_xblock.tasks import task_send_payload
 from webhook_xblock.utils import flatten_dict
 
 LOGGER = logging.getLogger(__name__)
-User = get_user_model()
 
 
-class WebhookXblock(XBlock):
+class WebhookXblock(XBlock):  # pylint: disable=too-many-instance-attributes
     """
     XBlock that triggers a specific webhook, it sends
     a payload with basic information about the course and
@@ -91,8 +89,11 @@ class WebhookXblock(XBlock):
         Helper that returns True if the XBlock is currently
         being called from studio mode, otherwise returns False.
         """
-        is_studio = hasattr(self.xmodule_runtime, "is_author_mode")
-        if is_studio or self.xmodule_runtime.__class__.__name__ == "StudioEditModuleRuntime":
+        is_studio = hasattr(self.xmodule_runtime, "is_author_mode")  # pylint: disable=no-member
+        if (
+            is_studio
+            or self.xmodule_runtime.__class__.__name__ == "StudioEditModuleRuntime"  # pylint: disable=no-member
+        ):
             return True
 
         return False
@@ -142,9 +143,9 @@ class WebhookXblock(XBlock):
         grade = {}
 
         try:
-            grade_user = User.objects.get(username=username)
+            grade_user = get_edx_user_model().objects.get(username=username)
             course_key = CourseKey.from_string(course_id)
-            course_grade = CourseGradeFactory().read(grade_user, course_key=course_key)
+            course_grade = get_course_grade_factory()().read(grade_user, course_key=course_key)
 
             grade = {
                 'passed': course_grade.passed,
@@ -155,9 +156,9 @@ class WebhookXblock(XBlock):
         except Exception as err:  # pylint: disable=broad-except
             LOGGER.error(
                 'Could not retrieve grades for %s user in course %s: %s',
-                user=username,
-                course=course_id,
-                err=err,
+                username,
+                course_id,
+                err,
             )
 
         return grade
@@ -218,7 +219,7 @@ class WebhookXblock(XBlock):
             current_anonymous_student_id = self.runtime.anonymous_student_id
             course_id = str(self.runtime.course_id)
             student = self.runtime.get_real_user(current_anonymous_student_id)
-            serialized_student = AccountUserSerializer(student)
+            serialized_student = get_account_user_serializer()(student)
             response = False
 
             payload = {
@@ -294,8 +295,8 @@ class WebhookXblock(XBlock):
     @staticmethod
     def _get_statici18n_js_url():
         """
-        Returns the Javascript translation file for the currently selected language, if any.
-        Defaults to English if available.
+        Returns the Javascript translation file for the currently
+        selected language, if any. Defaults to English if available.
         """
         locale_code = translation.get_language()
         if locale_code is None:
