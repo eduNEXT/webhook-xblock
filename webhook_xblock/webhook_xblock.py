@@ -12,9 +12,9 @@ import pkg_resources
 import requests
 from django.contrib.auth import get_user_model
 from django.utils import translation
-from lms.djangoapps.grades.course_grade_factory import CourseGradeFactory
+from webhook_xblock.edxapp_wrapper.grade import course_grade_factory as CourseGradeFactory
 from opaque_keys.edx.keys import CourseKey
-from openedx.core.djangoapps.user_api.accounts.serializers import AccountUserSerializer
+from webhook_xblock.edxapp_wrapper.user import account_user_serializer as AccountUserSerializer
 from xblock.core import XBlock
 from xblock.fields import Boolean, Dict, Scope, String
 from xblock.fragment import Fragment

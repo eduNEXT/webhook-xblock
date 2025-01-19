@@ -98,7 +98,7 @@ symlink_translations:
 
 test-python: clean ## Run test suite.
 	$(TOX) pip install -r requirements/test.txt --exists-action w
-	$(TOX) coverage run --source="." -m pytest ./webhook_xblock --ignore-glob='**/integration/*'
+	$(TOX) coverage run --source="." -m pytest ./webhook_xblock
 	$(TOX) coverage report -m --fail-under=71
 
 quality: clean ## Run quality test.

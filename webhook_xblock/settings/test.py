@@ -1,55 +1,72 @@
 """
-Test Django settings for webhook_xblock project.
+Django settings for webhook_xblock project.
+For more information on this file, see
+https://docs.djangoproject.com/en/2.2/topics/settings/
+For the full list of settings and their values, see
+https://docs.djangoproject.com/en/2.2/ref/settings/
 """
-from __future__ import unicode_literals
 
-import codecs
-import os
+# Application definition
 
-import yaml
+INSTALLED_APPS = (
+    'statici18n',
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    'webhook_xblock',
+)
 
-import webhook_xblock.locale.settings
-
-class SettingsClass:
-    """ dummy settings class """
-
-
-SETTINGS = SettingsClass()
-vars().update(SETTINGS.__dict__)
-INSTALLED_APPS = vars().get("INSTALLED_APPS", [])
-TEST_INSTALLED_APPS = [
-    "django.contrib.sites",
-]
-for app in TEST_INSTALLED_APPS:
-    if app not in INSTALLED_APPS:
-        INSTALLED_APPS.append(app)
-
-# For testing
+# SECURITY WARNING: keep the secret key used in production secret!
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": "default.db",
+        "USER": "",
+        "PASSWORD": "",
+        "HOST": "",
+        "PORT": "",
+    },
+    "read_replica": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": "read_replica.db",
+        "USER": "",
+        "PASSWORD": "",
+        "HOST": "",
+        "PORT": "",
     },
 }
 
+SECRET_KEY = "test"
 
-def plugin_settings(settings):  # pylint: disable=function-redefined
-    """
-    Set of plugin settings used by the Open Edx platform.
-    More info: https://github.com/openedx/edx-platform/blob/master/openedx/core/djangoapps/plugins/README.rst
-    """
-    settings.DATA_API_DEF_PAGE_SIZE = 1000
-    settings.DATA_API_MAX_PAGE_SIZE = 5000
-    settings.TEST_SITE = 1
+# Internationalization
+# https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-    # setup the databases used in the tutor local environment
-    lms_cfg = os.environ.get('LMS_CFG')
-    if lms_cfg:
-        with codecs.open(lms_cfg, encoding='utf-8') as file:
-            env_tokens = yaml.safe_load(file)
-        settings.DATABASES = env_tokens['DATABASES']
+LANGUAGE_CODE = 'en-us'
+
+TIME_ZONE = 'UTC'
+
+USE_I18N = True
+
+USE_L10N = True
+
+USE_TZ = True
 
 
-SETTINGS = SettingsClass()
-plugin_settings(SETTINGS)
-vars().update(SETTINGS.__dict__)
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/2.2/howto/static-files/
+
+STATIC_URL = '/static/'
+
+# statici18n
+# https://django-statici18n.readthedocs.io/en/latest/settings.html
+
+STATICI18N_DOMAIN = 'text'
+STATICI18N_PACKAGES = (
+    'webhook_xblock.translations',
+)
+STATICI18N_ROOT = 'webhook_xblock/public/js'
+STATICI18N_OUTPUT_DIR = 'translations'
+
+
+# Plugin settings
+WEBHOOK_USER_MODULE_BACKEND = "webhook_xblock.edxapp_wrapper.backends.grade_s_test"
+WEBHOOK_GRADE_MODULE_BACKEND = "webhook_xblock.edxapp_wrapper.backends.user_s_test"
