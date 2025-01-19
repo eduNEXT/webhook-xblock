@@ -97,7 +97,7 @@ symlink_translations:
 	if [ ! -d "$(TRANSLATIONS_DIR)" ]; then ln -s locale/ $(TRANSLATIONS_DIR); fi
 
 test-python: clean ## Run test suite.
-	$(TOX) pip install -r requirements/test.txt --exists-action w
+	$(TOX) pip install -r requirements/dev.txt --exists-action w
 	$(TOX) coverage run --source="." -m pytest ./webhook_xblock
 
 quality: clean ## Run quality test.

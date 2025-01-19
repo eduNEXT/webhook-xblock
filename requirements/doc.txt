@@ -71,6 +71,10 @@ django==4.2.18
     #   -c https://raw.githubusercontent.com/openedx/edx-lint/master/edx_lint/files/common_constraints.txt
     #   -r requirements/test.txt
     #   openedx-django-pyfs
+dnspython==2.7.0
+    # via
+    #   -r requirements/test.txt
+    #   pymongo
 doc8==1.1.2
     # via -r requirements/doc.in
 docutils==0.21.2
@@ -79,6 +83,8 @@ docutils==0.21.2
     #   readme-renderer
     #   restructuredtext-lint
     #   sphinx
+edx-opaque-keys==2.11.0
+    # via -r requirements/test.txt
 edx-sphinx-theme==3.1.0
     # via -r requirements/doc.in
 fs==2.4.16
@@ -143,7 +149,9 @@ packaging==24.2
     #   pytest
     #   sphinx
 pbr==6.1.0
-    # via stevedore
+    # via
+    #   -r requirements/test.txt
+    #   stevedore
 pluggy==1.5.0
     # via
     #   -r requirements/test.txt
@@ -157,6 +165,10 @@ pygments==2.19.1
     #   doc8
     #   readme-renderer
     #   sphinx
+pymongo==4.10.1
+    # via
+    #   -r requirements/test.txt
+    #   edx-opaque-keys
 pytest==8.3.4
     # via
     #   -r requirements/test.txt
@@ -227,7 +239,14 @@ sqlparse==0.5.3
     #   -r requirements/test.txt
     #   django
 stevedore==5.4.0
-    # via doc8
+    # via
+    #   -r requirements/test.txt
+    #   doc8
+    #   edx-opaque-keys
+typing-extensions==4.12.2
+    # via
+    #   -r requirements/test.txt
+    #   edx-opaque-keys
 tzdata==2024.2
     # via
     #   -r requirements/test.txt
