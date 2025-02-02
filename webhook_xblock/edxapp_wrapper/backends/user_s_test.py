@@ -5,7 +5,7 @@ User module test definitions for Open edX Sumac release.
 
 def get_serialized_user_account(*args, **kwargs):
     """
-    Return a fake serializer to avoid import error when executing
+    Returns an object to avoid import error when executing
     unit tests.
 
     Returns:
