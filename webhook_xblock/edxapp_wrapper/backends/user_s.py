@@ -1,22 +1,14 @@
 """
 User module definitions for Open edX Sumac release.
 """
-from django.contrib.auth import get_user_model  # pylint: disable=import-error
 from openedx.core.djangoapps.user_api.accounts.serializers import AccountUserSerializer  # pylint: disable=import-error
 
 
-def get_edx_user_model():
+def get_serialized_user_account(*args, **kwargs):
     """
-    Get current Open edX User model.
-    """
-    return get_user_model()
-
-
-def get_account_user_serializer():
-    """
-    Get AccountUserSerializer.
+    Get a Serialized User Account.
 
     Returns:
-        AccountUserSerializer: AccountUserSerializer object.
+       An  AccountUserSerializer instanced object
     """
-    return AccountUserSerializer
+    return AccountUserSerializer(*args, **kwargs)

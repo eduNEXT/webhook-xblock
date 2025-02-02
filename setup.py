@@ -6,7 +6,7 @@ import os
 import re
 import sys
 
-from setuptools import setup
+from setuptools import find_packages, setup
 
 
 def get_version(*file_paths):
@@ -88,9 +88,10 @@ setup(
     author='eduNEXT',
     author_email='technical@edunext.co',
     url='https://github.com/eduNEXT/webhook-xblock',
-    packages=[
-        'webhook_xblock',
-    ],
+    packages=find_packages(
+        include=['webhook_xblock', 'webhook_xblock.*'],
+        exclude=["*tests"],
+    ),
     include_package_data=True,
     install_requires=load_requirements('requirements/base.in'),
     python_requires=">=3.11",
@@ -110,10 +111,10 @@ setup(
             'webhook-xblock = webhook_xblock:WebhookXblock',
         ],
         'lms.djangoapp': [
-            "webhook-xblock = webhook_xblock.apps:WebhookXblockConfig",
+            "webhook_xblock = webhook_xblock.apps:WebhookXblockConfig",
         ],
         'cms.djangoapp': [
-            "webhook-xblock = webhook_xblock.apps:WebhookXblockConfig",
+            "webhook_xblock = webhook_xblock.apps:WebhookXblockConfig",
         ],
     },
     package_data=package_data("webhook_xblock", ["static", "public"]),
