@@ -16,7 +16,6 @@ from opaque_keys.edx.keys import CourseKey
 from xblock.core import XBlock
 from xblock.fields import Boolean, Dict, Scope, String
 from xblock.fragment import Fragment
-from xblockutils.resources import ResourceLoader
 
 from webhook_xblock.constants import REQUEST_TIMEOUT
 from webhook_xblock.edxapp_wrapper.grade import get_student_course_grade
@@ -304,7 +303,6 @@ class WebhookXblock(XBlock):  # pylint: disable=too-many-instance-attributes
         text_js = 'public/js/translations/{locale_code}/text.js'
         lang_code = locale_code.split('-')[0]
         for code in (locale_code, lang_code, 'en'):
-            loader = ResourceLoader(__name__)
             if importlib_files(__package__).joinpath(text_js.format(locale_code=code)).exists():
                 return text_js.format(locale_code=code)
         return None
