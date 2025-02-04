@@ -8,7 +8,7 @@ import datetime
 import json
 import logging
 
-import pkg_resources
+from importlib.resources import files as importlib_files
 import requests
 from django.contrib.auth import get_user_model
 from django.utils import translation
@@ -82,8 +82,7 @@ class WebhookXblock(XBlock):  # pylint: disable=too-many-instance-attributes
 
     def resource_string(self, path):
         """Handy helper for getting resources from our kit."""
-        data = pkg_resources.resource_string(__name__, path)
-        return data.decode("utf8")
+        return importlib_files(__package__).joinpath(path).read_text(encoding="utf-8")
 
     def check_if_running_from_studio(self):
         """
@@ -306,8 +305,7 @@ class WebhookXblock(XBlock):  # pylint: disable=too-many-instance-attributes
         lang_code = locale_code.split('-')[0]
         for code in (locale_code, lang_code, 'en'):
             loader = ResourceLoader(__name__)
-            if pkg_resources.resource_exists(
-                    loader.module_name, text_js.format(locale_code=code)):
+            if importlib_files(__package__).joinpath(text_js.format(locale_code=code)).exists():
                 return text_js.format(locale_code=code)
         return None
 
