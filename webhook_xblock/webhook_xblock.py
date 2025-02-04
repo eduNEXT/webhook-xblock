@@ -10,6 +10,7 @@ import logging
 
 import pkg_resources
 import requests
+from django.contrib.auth import get_user_model
 from django.utils import translation
 from opaque_keys.edx.keys import CourseKey
 from xblock.core import XBlock
@@ -18,8 +19,8 @@ from xblock.fragment import Fragment
 from xblockutils.resources import ResourceLoader
 
 from webhook_xblock.constants import REQUEST_TIMEOUT
-from webhook_xblock.edxapp_wrapper.grade import get_course_grade_factory
-from webhook_xblock.edxapp_wrapper.user import get_account_user_serializer, get_edx_user_model
+from webhook_xblock.edxapp_wrapper.grade import get_student_course_grade
+from webhook_xblock.edxapp_wrapper.user import get_serialized_user_account
 from webhook_xblock.tasks import task_send_payload
 from webhook_xblock.utils import flatten_dict
 
@@ -143,9 +144,9 @@ class WebhookXblock(XBlock):  # pylint: disable=too-many-instance-attributes
         grade = {}
 
         try:
-            grade_user = get_edx_user_model().objects.get(username=username)
+            grade_user = get_user_model().objects.get(username=username)
             course_key = CourseKey.from_string(course_id)
-            course_grade = get_course_grade_factory()().read(grade_user, course_key=course_key)
+            course_grade = get_student_course_grade(grade_user, course_key=course_key)
 
             grade = {
                 'passed': course_grade.passed,
@@ -219,7 +220,7 @@ class WebhookXblock(XBlock):  # pylint: disable=too-many-instance-attributes
             current_anonymous_student_id = self.runtime.anonymous_student_id
             course_id = str(self.runtime.course_id)
             student = self.runtime.get_real_user(current_anonymous_student_id)
-            serialized_student = get_account_user_serializer()(student)
+            serialized_student = get_serialized_user_account(student)
             response = False
 
             payload = {

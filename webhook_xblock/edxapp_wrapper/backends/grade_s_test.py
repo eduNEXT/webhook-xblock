@@ -3,9 +3,9 @@ Grades module test definitions for Open edX Sumac release.
 """
 
 
-def get_course_grade_factory():
+def get_student_course_grade(user, course_key):
     """
-    Return a fake CourseGradeFactory object to avoid import error when executing
+    Returns an object to avoid import error when executing
     unit tests.
 
     Returns:
@@ -16,4 +16,4 @@ def get_course_grade_factory():
             CourseGradeFactory  # pylint: disable=import-outside-toplevel
     except ImportError:
         CourseGradeFactory = object
-    return CourseGradeFactory
+    return CourseGradeFactory().read(user, course_key=course_key)

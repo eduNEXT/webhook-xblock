@@ -3,21 +3,9 @@ User module test definitions for Open edX Sumac release.
 """
 
 
-def get_edx_user_model():
+def get_serialized_user_account(*args, **kwargs):
     """
-    Return current Open edX custom User model.
-    """
-    try:
-        from django.contrib.auth import get_user_model  # pylint: disable=import-outside-toplevel
-        return get_user_model()
-    except ImportError:
-        from django.contrib.auth.models import User  # pylint: disable=import-outside-toplevel
-        return User
-
-
-def get_account_user_serializer():
-    """
-    Return a fake serializer to avoid import error when executing
+    Returns an object to avoid import error when executing
     unit tests.
 
     Returns:
@@ -28,4 +16,4 @@ def get_account_user_serializer():
             AccountUserSerializer  # pylint: disable=import-outside-toplevel
     except ImportError:
         AccountUserSerializer = object
-    return AccountUserSerializer
+    return AccountUserSerializer(*args, **kwargs)

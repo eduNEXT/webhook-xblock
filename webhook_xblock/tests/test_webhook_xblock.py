@@ -5,13 +5,6 @@ from unittest.mock import Mock, patch
 from webhook_xblock.webhook_xblock import REQUEST_TIMEOUT, WebhookXblock
 
 
-def mock_json_handler(func):
-    """Mock decorator to replace @XBlock.json_handler."""
-    def wrapper(*args, **kwargs):
-        return func(*args, **kwargs)
-    return wrapper
-
-
 class TestWebhookXblock(TestCase):
     """Unit tests for the WebhookXblock class."""
 
@@ -68,25 +61,29 @@ class TestWebhookXblock(TestCase):
 
         self.assertFalse(result)
 
-    @patch("webhook_xblock.webhook_xblock.get_edx_user_model")
-    @patch("webhook_xblock.webhook_xblock.get_course_grade_factory")
-    def test_get_course_grade_success(self, mock_course_grade_factory, mock_user_model):
+    @patch("webhook_xblock.webhook_xblock.get_user_model")
+    @patch("webhook_xblock.webhook_xblock.get_student_course_grade")
+    def test_get_course_grade_success(self, mock_course_grade, mock_user_model):
         """Test that get_course_grade returns the correct grade information."""
+        passed = True
+        percent = 0.85
+        letter_grade = "B"
         mock_user = Mock()
         mock_user.username = "student123"
         mock_user_model.objects.get.return_value = mock_user
-
-        mock_course_grade = Mock()
-        mock_course_grade.passed = True
-        mock_course_grade.percent = 0.85
-        mock_course_grade.letter_grade = "B"
-        mock_course_grade_factory()().read.return_value = mock_course_grade
+        mock_student_grade_results = Mock()
+        mock_student_grade_results.passed = passed
+        mock_student_grade_results.percent = percent
+        mock_student_grade_results.letter_grade = letter_grade
+        mock_course_grade.return_value = mock_student_grade_results
 
         grade = self.xblock.get_course_grade("course-v1:edX+DemoX+2025_T1", "student123")
 
-        self.assertEqual(grade, {"passed": True, "percent": 0.85, "letter_grade": "B"})
+        self.assertEqual(grade['passed'], passed)
+        self.assertEqual(grade['percent'], percent)
+        self.assertEqual(grade['letter_grade'], letter_grade)
 
-    @patch("webhook_xblock.webhook_xblock.get_edx_user_model")
+    @patch("webhook_xblock.webhook_xblock.get_user_model")
     def test_get_course_grade_exception(self, mock_user_model):
         """Test that get_course_grade returns an empty dict on exception."""
         mock_user_model.objects.get.side_effect = Exception("Error")
