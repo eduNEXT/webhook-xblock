@@ -7,8 +7,8 @@ student to a configurable URL, when visiting a specific course unit.
 import datetime
 import json
 import logging
-
 from importlib.resources import files as importlib_files
+
 import requests
 from django.contrib.auth import get_user_model
 from django.utils import translation
