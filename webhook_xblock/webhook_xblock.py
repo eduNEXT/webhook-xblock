@@ -7,8 +7,8 @@ student to a configurable URL, when visiting a specific course unit.
 import datetime
 import json
 import logging
+from importlib.resources import files as importlib_files
 
-import pkg_resources
 import requests
 from django.contrib.auth import get_user_model
 from django.utils import translation
@@ -16,7 +16,6 @@ from opaque_keys.edx.keys import CourseKey
 from xblock.core import XBlock
 from xblock.fields import Boolean, Dict, Scope, String
 from xblock.fragment import Fragment
-from xblockutils.resources import ResourceLoader
 
 from webhook_xblock.constants import REQUEST_TIMEOUT
 from webhook_xblock.edxapp_wrapper.grade import get_student_course_grade
@@ -82,8 +81,7 @@ class WebhookXblock(XBlock):  # pylint: disable=too-many-instance-attributes
 
     def resource_string(self, path):
         """Handy helper for getting resources from our kit."""
-        data = pkg_resources.resource_string(__name__, path)
-        return data.decode("utf8")
+        return importlib_files(__package__).joinpath(path).read_text(encoding="utf-8")
 
     def check_if_running_from_studio(self):
         """
@@ -305,9 +303,7 @@ class WebhookXblock(XBlock):  # pylint: disable=too-many-instance-attributes
         text_js = 'public/js/translations/{locale_code}/text.js'
         lang_code = locale_code.split('-')[0]
         for code in (locale_code, lang_code, 'en'):
-            loader = ResourceLoader(__name__)
-            if pkg_resources.resource_exists(
-                    loader.module_name, text_js.format(locale_code=code)):
+            if importlib_files(__package__).joinpath(text_js.format(locale_code=code)).exists():
                 return text_js.format(locale_code=code)
         return None
 
