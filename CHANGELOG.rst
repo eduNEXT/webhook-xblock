@@ -16,6 +16,14 @@ Unreleased
 
 *
 
+1.1.0 - 2025-06-22
+**********************************************
+
+Changed
+=======
+
+* **Teak Support**: Upgrade requirements based on edx-platform Teak release, update GitHub Actions workflows to use the `ubuntu-22.04` runner image.
+
 1.0.1 - 2025-02-04
 **********************************************
 
