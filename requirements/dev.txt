@@ -14,12 +14,12 @@ appdirs==1.4.4
     #   -r requirements/quality.txt
     #   -r requirements/test.txt
     #   fs
-asgiref==3.8.1
+asgiref==3.10.0
     # via
     #   -r requirements/quality.txt
     #   -r requirements/test.txt
     #   django
-astroid==3.3.10
+astroid==3.3.11
     # via
     #   -r requirements/quality.txt
     #   pylint
@@ -28,27 +28,27 @@ backports-tarfile==1.2.0
     # via
     #   -r requirements/quality.txt
     #   jaraco-context
-billiard==4.2.1
+billiard==4.2.2
     # via
     #   -r requirements/quality.txt
     #   -r requirements/test.txt
     #   celery
-boto3==1.38.41
+boto3==1.40.51
     # via
     #   -r requirements/quality.txt
     #   -r requirements/test.txt
     #   fs-s3fs
-botocore==1.38.41
+botocore==1.40.51
     # via
     #   -r requirements/quality.txt
     #   -r requirements/test.txt
     #   boto3
     #   s3transfer
-build==1.2.2.post1
+build==1.3.0
     # via
     #   -r requirements/pip-tools.txt
     #   pip-tools
-cachetools==6.1.0
+cachetools==6.2.1
     # via
     #   -r requirements/ci.txt
     #   tox
@@ -56,13 +56,13 @@ celery==5.5.3
     # via
     #   -r requirements/quality.txt
     #   -r requirements/test.txt
-certifi==2025.6.15
+certifi==2025.10.5
     # via
     #   -r requirements/ci.txt
     #   -r requirements/quality.txt
     #   -r requirements/test.txt
     #   requests
-cffi==1.17.1
+cffi==2.0.0
     # via
     #   -r requirements/quality.txt
     #   cryptography
@@ -71,13 +71,13 @@ chardet==5.2.0
     #   -r requirements/ci.txt
     #   diff-cover
     #   tox
-charset-normalizer==3.4.2
+charset-normalizer==3.4.4
     # via
     #   -r requirements/ci.txt
     #   -r requirements/quality.txt
     #   -r requirements/test.txt
     #   requests
-click==8.2.1
+click==8.3.0
     # via
     #   -r requirements/pip-tools.txt
     #   -r requirements/quality.txt
@@ -99,7 +99,7 @@ click-log==0.4.0
     # via
     #   -r requirements/quality.txt
     #   edx-lint
-click-plugins==1.1.1
+click-plugins==1.1.1.2
     # via
     #   -r requirements/quality.txt
     #   -r requirements/test.txt
@@ -119,30 +119,30 @@ colorama==0.4.6
     # via
     #   -r requirements/ci.txt
     #   tox
-coverage[toml]==7.9.1
+coverage[toml]==7.10.7
     # via
     #   -r requirements/ci.txt
     #   -r requirements/quality.txt
     #   -r requirements/test.txt
     #   codecov
     #   pytest-cov
-cryptography==45.0.4
+cryptography==46.0.2
     # via
     #   -r requirements/quality.txt
     #   secretstorage
-diff-cover==9.3.2
+diff-cover==9.7.1
     # via -r requirements/dev.in
 dill==0.4.0
     # via
     #   -r requirements/quality.txt
     #   pylint
-distlib==0.3.9
+distlib==0.4.0
     # via
     #   -r requirements/ci.txt
     #   virtualenv
-django==4.2.23
+django==5.2.7
     # via
-    #   -c https://raw.githubusercontent.com/openedx/edx-lint/master/edx_lint/files/common_constraints.txt
+    #   -c requirements/constraints.txt
     #   -r requirements/quality.txt
     #   -r requirements/test.txt
     #   django-appconf
@@ -153,12 +153,12 @@ django-appconf==1.1.0
     # via django-statici18n
 django-statici18n==2.6.0
     # via -r requirements/dev.in
-dnspython==2.7.0
+dnspython==2.8.0
     # via
     #   -r requirements/quality.txt
     #   -r requirements/test.txt
     #   pymongo
-docutils==0.21.2
+docutils==0.22.2
     # via
     #   -r requirements/quality.txt
     #   readme-renderer
@@ -170,7 +170,7 @@ edx-opaque-keys==3.0.0
     # via
     #   -r requirements/quality.txt
     #   -r requirements/test.txt
-filelock==3.18.0
+filelock==3.20.0
     # via
     #   -r requirements/ci.txt
     #   tox
@@ -191,7 +191,7 @@ id==1.5.0
     # via
     #   -r requirements/quality.txt
     #   twine
-idna==3.10
+idna==3.11
     # via
     #   -r requirements/ci.txt
     #   -r requirements/quality.txt
@@ -206,7 +206,7 @@ iniconfig==2.1.0
     #   -r requirements/quality.txt
     #   -r requirements/test.txt
     #   pytest
-isort==6.0.1
+isort==6.1.0
     # via
     #   -r requirements/quality.txt
     #   pylint
@@ -218,7 +218,7 @@ jaraco-context==6.0.1
     # via
     #   -r requirements/quality.txt
     #   keyring
-jaraco-functools==4.1.0
+jaraco-functools==4.3.0
     # via
     #   -r requirements/quality.txt
     #   keyring
@@ -252,14 +252,14 @@ lazy==1.6
     #   -r requirements/quality.txt
     #   -r requirements/test.txt
     #   xblock
-lxml[html-clean]==5.4.0
+lxml[html-clean]==6.0.2
     # via
     #   -r requirements/quality.txt
     #   -r requirements/test.txt
     #   edx-i18n-tools
     #   lxml-html-clean
     #   xblock
-lxml-html-clean==0.4.2
+lxml-html-clean==0.4.3
     # via lxml
 mako==1.3.10
     # via
@@ -268,11 +268,11 @@ mako==1.3.10
     #   -r requirements/test.txt
     #   xblock
     #   xblock-utils
-markdown-it-py==3.0.0
+markdown-it-py==4.0.0
     # via
     #   -r requirements/quality.txt
     #   rich
-markupsafe==3.0.2
+markupsafe==3.0.3
     # via
     #   -r requirements/quality.txt
     #   -r requirements/test.txt
@@ -287,12 +287,12 @@ mdurl==0.1.2
     # via
     #   -r requirements/quality.txt
     #   markdown-it-py
-more-itertools==10.7.0
+more-itertools==10.8.0
     # via
     #   -r requirements/quality.txt
     #   jaraco-classes
     #   jaraco-functools
-nh3==0.2.21
+nh3==0.3.1
     # via
     #   -r requirements/quality.txt
     #   readme-renderer
@@ -315,14 +315,9 @@ packaging==25.0
     #   twine
 path==16.16.0
     # via edx-i18n-tools
-pbr==6.1.1
-    # via
-    #   -r requirements/quality.txt
-    #   -r requirements/test.txt
-    #   stevedore
-pip-tools==7.4.1
+pip-tools==7.5.1
     # via -r requirements/pip-tools.txt
-platformdirs==4.3.8
+platformdirs==4.5.0
     # via
     #   -r requirements/ci.txt
     #   -r requirements/quality.txt
@@ -340,20 +335,20 @@ pluggy==1.6.0
     #   tox
 polib==1.2.0
     # via edx-i18n-tools
-prompt-toolkit==3.0.51
+prompt-toolkit==3.0.52
     # via
     #   -r requirements/quality.txt
     #   -r requirements/test.txt
     #   click-repl
 pycodestyle==2.14.0
     # via -r requirements/quality.txt
-pycparser==2.22
+pycparser==2.23
     # via
     #   -r requirements/quality.txt
     #   cffi
 pydocstyle==6.3.0
     # via -r requirements/quality.txt
-pygments==2.19.1
+pygments==2.19.2
     # via
     #   -r requirements/quality.txt
     #   -r requirements/test.txt
@@ -361,8 +356,9 @@ pygments==2.19.1
     #   pytest
     #   readme-renderer
     #   rich
-pylint==3.3.7
+pylint==3.3.9
     # via
+    #   -c requirements/constraints.txt
     #   -r requirements/quality.txt
     #   edx-lint
     #   pylint-celery
@@ -376,17 +372,17 @@ pylint-django==2.6.1
     # via
     #   -r requirements/quality.txt
     #   edx-lint
-pylint-plugin-utils==0.8.2
+pylint-plugin-utils==0.9.0
     # via
     #   -r requirements/quality.txt
     #   pylint-celery
     #   pylint-django
-pymongo==4.13.2
+pymongo==4.15.3
     # via
     #   -r requirements/quality.txt
     #   -r requirements/test.txt
     #   edx-opaque-keys
-pyproject-api==1.9.1
+pyproject-api==1.10.0
     # via
     #   -r requirements/ci.txt
     #   tox
@@ -395,13 +391,13 @@ pyproject-hooks==1.2.0
     #   -r requirements/pip-tools.txt
     #   build
     #   pip-tools
-pytest==8.4.1
+pytest==8.4.2
     # via
     #   -r requirements/quality.txt
     #   -r requirements/test.txt
     #   pytest-cov
     #   pytest-django
-pytest-cov==6.2.1
+pytest-cov==7.0.0
     # via
     #   -r requirements/quality.txt
     #   -r requirements/test.txt
@@ -425,7 +421,7 @@ pytz==2025.2
     #   -r requirements/quality.txt
     #   -r requirements/test.txt
     #   xblock
-pyyaml==6.0.2
+pyyaml==6.0.3
     # via
     #   -r requirements/quality.txt
     #   -r requirements/test.txt
@@ -436,7 +432,7 @@ readme-renderer==44.0
     # via
     #   -r requirements/quality.txt
     #   twine
-requests==2.32.4
+requests==2.32.5
     # via
     #   -r requirements/ci.txt
     #   -r requirements/quality.txt
@@ -453,20 +449,20 @@ rfc3986==2.0.0
     # via
     #   -r requirements/quality.txt
     #   twine
-rich==14.0.0
+rich==14.2.0
     # via
     #   -r requirements/quality.txt
     #   twine
-s3transfer==0.13.0
+s3transfer==0.14.0
     # via
     #   -r requirements/quality.txt
     #   -r requirements/test.txt
     #   boto3
-secretstorage==3.3.3
+secretstorage==3.4.0
     # via
     #   -r requirements/quality.txt
     #   keyring
-simplejson==3.20.1
+simplejson==3.20.2
     # via
     #   -r requirements/quality.txt
     #   -r requirements/test.txt
@@ -490,7 +486,7 @@ sqlparse==0.5.3
     #   -r requirements/quality.txt
     #   -r requirements/test.txt
     #   django
-stevedore==5.4.1
+stevedore==5.5.0
     # via
     #   -r requirements/quality.txt
     #   -r requirements/test.txt
@@ -504,7 +500,7 @@ tomlkit==0.13.3
     # via
     #   -r requirements/quality.txt
     #   pylint
-tox==4.27.0
+tox==4.31.0
     # via
     #   -r requirements/ci.txt
     #   tox-battery
@@ -512,9 +508,9 @@ tox-battery==0.6.1
     # via -r requirements/dev.in
 transifex-client==0.12.5
     # via -r requirements/dev.in
-twine==6.1.0
+twine==6.2.0
     # via -r requirements/quality.txt
-typing-extensions==4.14.0
+typing-extensions==4.15.0
     # via
     #   -r requirements/quality.txt
     #   -r requirements/test.txt
@@ -524,9 +520,8 @@ tzdata==2025.2
     #   -r requirements/quality.txt
     #   -r requirements/test.txt
     #   kombu
-urllib3==2.2.3
+urllib3==2.5.0
     # via
-    #   -c https://raw.githubusercontent.com/openedx/edx-lint/master/edx_lint/files/common_constraints.txt
     #   -r requirements/ci.txt
     #   -r requirements/quality.txt
     #   -r requirements/test.txt
@@ -541,11 +536,11 @@ vine==5.1.0
     #   amqp
     #   celery
     #   kombu
-virtualenv==20.31.2
+virtualenv==20.35.3
     # via
     #   -r requirements/ci.txt
     #   tox
-wcwidth==0.2.13
+wcwidth==0.2.14
     # via
     #   -r requirements/quality.txt
     #   -r requirements/test.txt
