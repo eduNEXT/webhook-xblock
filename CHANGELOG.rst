@@ -16,6 +16,14 @@ Unreleased
 
 *
 
+1.2.0 - 2025-10-14
+**********************************************
+
+Changed
+=======
+
+* **Ulmo Support**: Upgrade requirements base on edx-platform Ulmo release, update GitHub Workflows with new actions version.
+
 1.1.0 - 2025-06-22
 **********************************************
 
